@@ -1,0 +1,141 @@
+{include file="common/meta"}
+<body>
+  <div class="x-nav">
+    <span class="layui-breadcrumb">
+      <a href="">首页</a>
+      <a href="">演示</a>
+      <a>
+        <cite>导航元素</cite></a>
+    </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+      <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+  </div>
+  <div class="x-body">
+    <div class="layui-row">
+      <form class="layui-form layui-col-md12 x-so">
+        <input class="layui-input" placeholder="开始日" name="start" id="start">
+        <input class="layui-input" placeholder="截止日" name="end" id="end">
+        <div class="layui-input-inline">
+          <select name="contrller">
+            <option>支付状态</option>
+            <option>已支付</option>
+            <option>未支付</option>
+          </select>
+        </div>
+        <div class="layui-input-inline">
+          <select name="contrller">
+            <option>支付方式</option>
+            <option>支付宝</option>
+            <option>微信</option>
+            <option>货到付款</option>
+          </select>
+        </div>
+        <div class="layui-input-inline">
+          <select name="contrller">
+            <option value="">订单状态</option>
+            <option value="0">待确认</option>
+            <option value="1">已确认</option>
+            <option value="2">已收货</option>
+            <option value="3">已取消</option>
+            <option value="4">已完成</option>
+            <option value="5">已作废</option>
+          </select>
+        </div>
+        <input type="text" name="username"  placeholder="请输入订单号" autocomplete="off" class="layui-input">
+        <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+      </form>
+    </div>
+    <xblock>
+        <a title="" href="" class="layui-btn">添加</a>
+        <a title="" href="" class="layui-btn layui-btn-normal">列表</a>
+        <a title="" href="" class="layui-btn layui-btn-warm">按钮</a>
+      <span class="x-right" style="line-height:40px">共有数据：{$count||default="0-0"} 条</span>
+    </xblock>
+
+
+    <table class="layui-table">
+      <thead>
+        <tr>
+          <th>
+            <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+          </th>
+          <th>订单编号</th>
+          <th>下单账号</th>
+          <th>总金额</th>
+          <th>应付金额</th>
+          <th>订单状态</th>
+          <th>支付状态</th>
+          <th>发货状态</th>
+          <th>支付方式</th>
+
+          <th>配送方式</th>
+          <th>下单时间</th>
+          <th >操作</th>
+          </tr>
+      </thead>
+      <tbody>
+      {foreach $data as $v}
+
+        <tr>
+          <td>
+            <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+          </td>
+          <td>{$v.order_sn | default="null"}</td>
+          <td>{$v.user_name | default="null"}</td>
+          <td>{$v.order_price | default="null"}</td>
+          <td>
+          	应付：{$v.order_money | default="null"}	<br>
+          	{if $v.order_red} 红包减：{$v.order_red}{/if}<br>
+          	{if $v.order_youhui} 订单优惠：{$v.order_youhui}{/if}
+          </td>
+          <td>{$v.order_status | default="null"}</td>
+          <td>{$v.is_pay | default="null"}</td>
+          <td>{$v.is_send | default="null"}</td>
+          <td>`````</td>
+
+          <td> <i class="iconfont">&#xe806;</i></td>
+          <td>{$v.order_sn | default="null"}</td>
+          <td class="td-manage">
+            <a title="查看订单详情" href="{:url('Order/info',['id'=>$v.id])}">
+                <i class="layui-icon">&#xe63c;</i>
+            </a>
+
+            <a title="删除" onclick="data_del(this,'{$v.id}')" href="javascript:;">
+                <i class="layui-icon">&#xe640;</i>
+            </a>
+          </td>
+        </tr>
+
+        {/foreach}
+      </tbody>
+    </table>
+  {if $count==0}<center><p>----没有数据----</p></center>{/if}
+  <div class="page">
+     {$data->render()}
+  </div>
+
+  </div>
+</body>
+<script type="text/javascript">
+function data_del(obj,id){
+    layer.confirm('确认要删除吗？',function(){
+        //发异步删除数据
+        $.ajax({
+          type:"POST",
+          url:"{:url('Order/delete')}"+'?id='+id,
+          success:function(data){
+            data = JSON.parse(data);
+              if(data.status==1){
+                $(obj).parents("tr").remove();
+                  layer.msg(data.msg,function(){
+                     window.location.reload();
+                  });
+              }else{
+                  layer.msg(data.msg);
+              }
+          },
+        });
+    });
+}  
+</script>
+

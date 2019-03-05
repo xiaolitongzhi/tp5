@@ -1,0 +1,115 @@
+{include file="common/meta"}  
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">演示</a>
+        <a>
+          <cite>导航元素</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+       
+    <xblock>
+      <a title="添加店铺" href="{:url('Store/create')}" class="layui-btn">添加</a>
+      <a title="返回店铺列表" href="{:url('Store/list')}" class="layui-btn layui-btn-normal">列表</a>
+      <a title="" href="" class="layui-btn layui-btn-warm">按钮</a>
+    </xblock>
+
+
+        <fieldset class="layui-elem-field">
+            <div class="layui-field-box">
+              <form class="layui-form" id="submit_form">
+      
+                <div class="layui-form-item">
+                  <label class="layui-form-label">店铺名</label>
+                  <div class="layui-input-block">
+                    <input type="text" name="store_name" required  lay-verify="required" placeholder="请输入店铺名称" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
+
+                <div class="layui-inline">
+                  <label class="layui-form-label">坐标</label>
+                  <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="x_n" placeholder="x" autocomplete="off" class="layui-input">
+                  </div>
+                  <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="y_e" placeholder="y" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
+
+                       <div class="layui-form-item" id="x-city">
+                        <label class="layui-form-label">城市联动</label>
+                        <div class="layui-input-inline">
+                          <select name="address_sheng" lay-filter="province">
+                            <option value="">请选择省</option>
+                          </select>
+                        </div>
+                        <div class="layui-input-inline">
+                          <select name="address_shi" lay-filter="city">
+                            <option value="">请选择市</option>
+                          </select>
+                        </div>
+                        <div class="layui-input-inline">
+                          <select name="address_qu" lay-filter="area">
+                            <option value="">请选择县/区</option>
+                          </select>
+                        </div>
+                      </div>
+                   
+                
+
+
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">默认</label>
+                    <div class="layui-input-block">
+                      <input type="checkbox" checked="" name="is_send" lay-skin="switch" lay-filter="switchTest" lay-text="开|否">
+                    </div>
+                </div>
+                 
+          
+                <div class="layui-form-item">
+                  <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                    </div>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+        </fieldset>
+    </div>
+</html>
+<script>
+$(function  () {
+        layui.use(['form'], function(){
+            var form = layui.form
+            ,layer = layui.layer
+
+          //监听提交
+          form.on('submit(formDemo)', function(data){
+              $.ajax({
+                  type:"POST",
+                  url:"{:url('Store/save')}",
+                  data:$("#submit_form").serialize(),
+                  dataType:"json",
+                  success:function(data){
+                      if(data.status==1){
+                          layer.msg(data.msg,function(){
+                            window.location.href="{:url('Store/list')}";
+                          });
+                      }else{
+                          layer.msg(data.msg);
+                      }
+                  }
+              });
+            return false;
+          });
+        });
+    })
+</script>
+

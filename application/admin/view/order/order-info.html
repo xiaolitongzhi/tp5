@@ -1,0 +1,152 @@
+{include file="common/meta"}  
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">演示</a>
+        <a>
+          <cite>导航元素</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+       
+        <xblock>
+          <a title="添加红包券" href="{:url('Order/create')}" class="layui-btn">添加</a>
+          <a title="" href="{:url('Order/list')}" class="layui-btn layui-btn-normal">列表</a>
+          <a title="" href="" class="layui-btn layui-btn-warm">按钮</a>
+        </xblock>
+
+
+		<!--下单人信息-->
+		<fieldset class="layui-elem-field">
+		<legend>客户信息</legend>
+		<div class="layui-field-box">
+			<table class="layui-table">
+				<tbody id="tbody">
+				<tr>
+					<th>下单账号</th>
+					<td>111111</td>
+					<th>门店地址</th>
+					<td>222222222222</td>
+					<th>门店电话</th>
+					<td> 333333333333</td>
+				</tr>
+				<tr>
+					<th>预约单号</th>
+					<td>2222222222</td>
+					<th>车辆类型</th>
+					<td>333333333333</td>
+					<th>车牌号</th>
+					<td>44444444444444444</td>
+				</tr>
+				<tr>
+					<th>出厂日期</th>
+					<td> 11111111111111</td>
+
+					<th>保养类型</th>
+					<td>1111111111111111</td>
+					<th>公里数</th>
+					<td>111111111111111111111</td>
+				</tr>
+				<tr>
+					<th>车主姓名</th>
+					<td>11111111111111111111</td>
+					<th>车主电话</th>
+					<td>111111111111111111111</td>
+					<th>备注信息</th>
+					<td>11111111111111111111</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</fieldset>
+
+
+		<!--订单信息-->
+		<fieldset class="layui-elem-field">
+		<legend>订单信息</legend>
+		<div class="layui-field-box">
+			<table class="layui-table">
+				<tbody id="tbody1">
+				<tr>
+					<th>订单号</th>
+					<td>22222222222</td>
+					<th>下单时间</th>
+					<td>2018-01-22</td>
+				</tr>
+				<tr>
+					<th>收货人</th>
+					<td>王龙</td>
+					<th>收货人电话</th>
+					<td>15611887788</td>
+					<th>发货状态</th>
+					<td>未发货</td>
+				</tr>
+				<tr>
+					<th>收货地址</th>
+					<td>河南省</td>
+				</tr>
+				<tr>
+					<th>付款金额</th>
+					<td>100.00</td>
+					<th>红包折扣</th>
+					<td>0.00</td>
+					<th>优惠折扣</th>
+					<td>0.00</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		</fieldset>
+
+
+		<!--商品信息-->
+		<fieldset class="layui-elem-field">
+		<legend>商品信息</legend>
+		<div class="layui-field-box">
+			<table class="layui-table">
+				<tbody id="tbody2">
+				<tr>
+					<th>商品名称</th>
+					<td>2222222222222</td>
+					<th>数量</th>
+					<td>333333333333333</td>
+					<th>价钱</th>
+					<td> 333333333333</td>
+					<th>采购人</th>
+					<td>33333333</td>
+					<th>采购操作时间</th>
+					<td> 33333</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</fieldset>
+
+	<fieldset class="layui-elem-field">
+		<legend>订单流程</legend>
+		<div class="layui-field-box">
+			<ul class="layui-timeline">
+				<li class="layui-timeline-item">
+					<i class="layui-icon layui-timeline-axis"></i>
+					<div class="layui-timeline-content layui-text">
+						<h3 class="layui-timeline-title">8月18日 12：22</h3>
+						<p>操作人员：金鑫</p>
+						<p>接单成功</p>
+					</div>
+				</li>
+
+				<li class="layui-timeline-item">
+					<i class="layui-icon layui-timeline-axis"></i>
+					<div class="layui-timeline-content layui-text">
+						<h3 class="layui-timeline-title">8月15日 12：25</h3>
+						<p>操作人员：杨林</p>
+						<p>确认沟通客户，客服接单</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</fieldset>
+    </div>
+</html>

@@ -1,0 +1,157 @@
+{include file="common/meta"}  
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">演示</a>
+        <a>
+          <cite>导航元素</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+       
+        <xblock>
+          <a title="添加红包券" href="{:url('Red/create')}" class="layui-btn">添加</a>
+          <a title="" href="{:url('Red/list')}" class="layui-btn layui-btn-normal">列表</a>
+          <a title="" href="" class="layui-btn layui-btn-warm">按钮</a>
+        </xblock>
+
+
+        <fieldset class="layui-elem-field">
+            <div class="layui-field-box">
+                <form class="layui-form" id="submit_form">
+        
+                  
+
+
+                    <div class="layui-form-item">
+                        <label  class="layui-form-label">
+                            <span class="x-red">*</span>标题
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="name" required="" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <label  class="layui-form-label">
+                          <span class="x-red">*</span>note1
+                      </label>
+                      <div class="layui-input-inline">
+                          <input type="text"  name="note1" required="" class="layui-input">
+                      </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                      <label  class="layui-form-label">
+                          <span class="x-red">*</span>note2
+                      </label>
+                      <div class="layui-input-inline">
+                          <input type="text"  name="note2" required="" class="layui-input">
+                      </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                      <label  class="layui-form-label">
+                          <span class="x-red">*</span>note3
+                      </label>
+                      <div class="layui-input-inline">
+                          <input type="text"  name="note3" required="" class="layui-input">
+                      </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                      <label  class="layui-form-label">
+                          <span class="x-red">*</span>note4
+                      </label>
+                      <div class="layui-input-inline">
+                          <input type="text"  name="note4" required="" class="layui-input">
+                      </div>
+                  </div>
+
+
+
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">红包价格</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="price"  lay-verify="price" placeholder="请输入红包价格"  class="layui-input" >
+                    </div>
+
+                     <label class="layui-form-label">使用门槛</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="order_price" lay-verify="price" placeholder="红包使用价格门槛"  class="layui-input"  >
+                    </div>
+                  </div>
+
+
+
+                  <div class="layui-form-item">
+                    <div class="layui-inline">
+                      <label class="layui-form-label">开始时间</label>
+                      <div class="layui-input-inline">
+                        <input type="text" name="send_times" id="send_times" lay-verify="send_times" placeholder="yyyy-MM-dd"  class="layui-input">
+                      </div>
+                    </div>
+
+                    <div class="layui-inline">
+                      <label class="layui-form-label">结束时间</label>
+                      <div class="layui-input-inline">
+                        <input type="text" name="end_time" id="end_time" lay-verify="end_time" placeholder="yyyy-MM-dd"  class="layui-input">
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                    <div class="layui-form-item">
+                      <div class="layui-form-item">
+                      <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                      </div>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+    </div>
+</html>
+<script>
+    $(function  () {
+            layui.use(['form','laydate'], function(){
+                var form = layui.form
+                ,layer = layui.layer
+                ,laydate = layui.laydate;
+
+               //日期开始
+                laydate.render({
+                  elem: '#send_times'
+                });
+                laydate.render({
+                  elem: '#end_time'
+                });
+           
+              //监听提交
+              form.on('submit(formDemo)', function(data){
+                  $.ajax({
+                      type:"POST",
+                      url:"{:url('Red/save')}",
+                      data:$("#submit_form").serialize(),
+                      dataType:"json",
+                      success:function(data){
+                          if(data.status==1){
+                              layer.msg(data.msg,function(){
+                                window.location.href="{:url('Red/list')}";
+                              });
+                          }else{
+                              layer.msg(data.msg);
+                          }
+                      }
+                  });
+                return false;
+              });
+            });
+        })
+    </script>

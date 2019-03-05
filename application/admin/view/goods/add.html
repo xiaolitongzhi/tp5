@@ -1,0 +1,237 @@
+{include file="common/meta"}  
+<script src="{:config('static_admin_path')}/ueditor/ueditor.config.js" type="text/javascript" charset="utf-8"></script>
+<script src="{:config('static_admin_path')}/ueditor/ueditor.all.js" type="text/javascript" charset="utf-8"></script>
+<script src="{:config('static_admin_path')}/ueditor/lang/zh-cn/zh-cn.js" type="text/javascript" charset="utf-8"></script>
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">演示</a>
+        <a>
+          <cite>导航元素</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+       
+        <xblock>
+            <a title="添加商品" href="{:url('Goods/create')}" class="layui-btn">添加</a>
+            <a title="商品列表" href="{:url('Goods/list')}" class="layui-btn layui-btn-normal">列表</a>
+            <a title="" href="" class="layui-btn layui-btn-warm">按钮</a>
+        </xblock>
+
+
+        <fieldset class="layui-elem-field">
+            <div class="layui-field-box">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">分类选择</label>
+                            <div class="layui-input-block">
+                                <select name="cate_id"  required>
+                                    <option value="">--请选择--</option>
+                                    {foreach $data_cate as $v}
+                                    <option value="{$v.cate_id}">{$v.cate_name}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="goods_name" name="goods_name" lay-verify="required" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品编码</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="goods_en" name="goods_en" lay-verify="required" autocomplete="off" class="layui-input">
+                            </div>
+
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">初始库存</label>
+                            <div class="layui-input-inline">
+                                <input type="number" id="stock" name="stock" lay-verify="required" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品价格1</label>
+                            <div class="layui-input-inline">
+                                <input type="number" id="goods_price_1" name="goods_price_1" lay-verify="required" autocomplete="off" class="layui-input" value="0">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品价格2</label>
+                            <div class="layui-input-inline">
+                                <input type="number" id="goods_price_2" name="goods_price_2" lay-verify="required" autocomplete="off" class="layui-input" value="0">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品价格3</label>
+                            <div class="layui-input-inline">
+                                <input type="number" id="goods_price_3" name="goods_price_3" lay-verify="required" autocomplete="off" class="layui-input" value="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">goods_en</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="goods_en" name="goods_en" lay-verify="required" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">goods_attr_desc</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="goods_attr_desc" name="goods_attr_desc" lay-verify="required" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">goods_price_coin</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="goods_price_coin" name="goods_price_coin" lay-verify="required" class="layui-input">
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label" style="">图片：</label>
+                        <div class="layui-upload">
+                            <div class="layui-upload">
+                                <button type="button" class="layui-btn layui-btn-danger" id="test1"><i class="layui-icon"></i>上传图片</button>
+                                <div class="layui-inline layui-word-aux">
+                                    文件大小限制在 1M 以内，图片比例推荐200×100
+                                </div>
+                                <div class="layui-upload-list" style="">
+                                    <label  class="layui-form-label" >预览图
+                                    </label>
+                                    <label for="test1">
+                                        <img class="layui-upload-img" id="demo1" style=" width: 200px;height: 100px;" src="" >
+                                    </label>
+                                    <input type="hidden" name="main_img" value="" id="demo2">
+                                    <p id="demoText"></p>
+                                    <div class="layui-form-item">
+                                        <label  class="layui-form-label" >
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item layui-form-text">
+                        <label for="content" class="layui-form-label">
+                            详情
+                        </label>
+                        <div class="layui-input-block">
+
+                            <!-- 加载编辑器的容器 -->
+                            <script id="container" name="content" type="text/plain" style="height:400px;width:99%;">
+                                这里写你的初始化内容
+                            </script>
+                            <!-- 实例化编辑器 -->
+                            <script type="text/javascript">
+                            var ue = UE.getEditor('container');
+                            </script>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                      </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+    </div>
+</html>
+<script>
+layui.use(['form','upload','layer'], function(){
+        $ = layui.jquery;
+        var form = layui.form,
+            upload = layui.upload,
+            layer = layui.layer;
+
+
+
+
+        form.on('submit(formDemo)', function(data){
+        $.ajax({
+                type:"POST",
+                url:"{:url('Goods/save')}",
+                data:data.field,
+                dataType:"json",
+                success:function(res){
+                    if(res.status==1){
+                        layer.alert(res.msg,function(){
+                             window.location.href="{:url('Goods/list')}";
+                        });
+                    }else{
+                        layer.alert(res.msg);
+                    }
+                }
+            });
+         
+          return false;
+        });
+
+
+      
+        //普通图片上传
+        var uploadInst = upload.render({
+                elem: '#test1',
+                url:"{:url('Goods/upload')}",
+
+            size: 2048 //限制文件大小，单位 KB
+            ,
+            before: function(obj) {
+
+            //预读本地文件示例，不支持ie8
+            obj.preview(function(index, file, result) {
+                $('#demo1').attr('src', result); //图片链接（base64）
+            });
+        },
+        done: function(res) {
+            //如果上传失败
+            if(res.code > 0) {
+                return layer.msg('上传失败');
+            }else{
+                $('#demo2').attr('value', res.data.src); //后台传送（base64）
+                return layer.msg('图片上传成功');
+            }
+            //上传成功
+        },
+        error: function() {
+            // {code=0
+            // msg="xioi"
+            // src =url
+            //演示失败状态，并实现重传
+            var demoText = $('#demoText');
+            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+            demoText.find('.demo-reload').on('click', function() {
+                uploadInst.upload();
+            });
+        }
+    });
+});
+
+
+
+</script>

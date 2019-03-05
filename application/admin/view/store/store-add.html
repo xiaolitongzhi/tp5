@@ -1,0 +1,127 @@
+{include file="common/meta"} 
+
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">演示</a>
+        <a>
+          <cite>导航元素</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+       
+      <xblock>
+        <a title="添加店铺" href="{:url('Store/create')}" class="layui-btn">添加</a>
+        <a title="返回店铺列表" href="{:url('Store/list')}" class="layui-btn layui-btn-normal">列表</a>
+        <a title="" href="" class="layui-btn layui-btn-warm">按钮</a>
+      </xblock>
+
+        <fieldset class="layui-elem-field">
+            <div class="layui-field-box">
+                <form class="layui-form">
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">店铺名</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="store_name" required  lay-verify="required" placeholder="请输入店铺名称" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+
+                  <div class="layui-inline">
+                    <label class="layui-form-label">坐标</label>
+                    <div class="layui-input-inline" style="width: 100px;">
+                      <input type="text" name="x_n" placeholder="x" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-input-inline" style="width: 100px;">
+                      <input type="text" name="y_e" placeholder="y" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+
+
+                      
+                  
+                  <div class="layui-form-item">
+                       <div class="layui-form-item" id="x-city">
+                        <label class="layui-form-label">城市联动</label>
+                        <div class="layui-input-inline">
+                          <select name="address_sheng" lay-filter="province">
+                            <option value="">请选择省</option>
+                          </select>
+                        </div>
+                        <div class="layui-input-inline">
+                          <select name="address_shi" lay-filter="city">
+                            <option value="">请选择市</option>
+                          </select>
+                        </div>
+                        <div class="layui-input-inline">
+                          <select name="address_qu" lay-filter="area">
+                            <option value="">请选择县/区</option>
+                          </select>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item layui-form-text">
+                      <label for="address_xiangxi" class="layui-form-label">
+                          详细地址
+                      </label>
+                      <div class="layui-input-block">
+                          <textarea placeholder="请输入内容" id="address_xiangxi" name="address_xiangxi" class="layui-textarea"></textarea>
+                      </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                      <label class="layui-form-label">默认</label>
+                      <div class="layui-input-block">
+                        <input type="checkbox" checked="" name="is_send" lay-skin="switch" lay-filter="switchTest" lay-text="开|否">
+                      </div>
+                  </div>
+
+
+
+
+
+                    <div class="layui-form-item">
+                      <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                      </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+    </div>
+</html>
+<script type="text/javascript" src="{:config('static_admin_path')}/js/xcity.js"></script>
+<script>
+  layui.use(['form','code','layer'], function(){
+    form = layui.form;
+    $ = layui.jquery;
+    layer = layui.layer;
+    layui.code();
+    $('#x-city').xcity('北京','','');
+
+    form.on('submit(formDemo)', function(data){
+    $.ajax({
+            type:"POST",
+            url:"{:url('Store/save')}",
+            data:data.field,
+            dataType:"json",
+            success:function(res){
+                if(res.status==1){
+                    layer.alert(res.msg,function(){
+                         window.location.href="{:url('Store/list')}";
+                    });
+                }else{
+                    layer.alert(res.msg);
+                }
+            }
+        });
+     
+      return false;
+    });
+
+  });
+</script>
+
